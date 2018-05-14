@@ -1,0 +1,26 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+if(.Platform$OS.type == "unix") {
+  knitr::opts_chunk$set(engine.path = list(python = '/anaconda/bin/python'))
+} else {
+  knitr::opts_chunk$set(engine.path = list(python = file.path(Sys.getenv("USERPROFILE"),"Anaconda2\\python.exe", fsep='\\')))
+}
+```
+
+```{python}
+import os
+x='hello'
+```
+
+```{python}
+os.getcwd()
+print x
+```
+
+
