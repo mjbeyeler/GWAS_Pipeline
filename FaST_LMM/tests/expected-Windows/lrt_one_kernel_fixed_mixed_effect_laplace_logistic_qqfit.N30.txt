@@ -1,0 +1,2 @@
+SetId	LogLikeAlt	LogLikeNull	P-value	#SNPs_in_Set	#ExcludedSNPs	chrm	pos. range	Alt_h2	Alt_a2
+set23	19.5728097029	19.5728097029	1.0	24	0	23.0	0.0-52.0	nan	nan

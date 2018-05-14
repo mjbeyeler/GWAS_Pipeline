@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6B22A3AA-CF04-48DF-87DA-EEF401891E85}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pyplink", "pyplink\pyplink.pyproj", "{67DD0427-0316-415B-9144-8098A6ABD371}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "util", "util\util.pyproj", "{9144F8B5-632B-4A72-BD8E-01D453AFFB5A}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "tests", "..\tests\tests.pyproj", "{3EE8BAA4-AB65-41F2-AF90-A3CF3189016E}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "association", "association\association.pyproj", "{52D85A6D-FD53-41E5-B7E2-6ACC38373C98}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "external", "external\external.pyproj", "{CE9EDF94-8A08-4DB8-B2AB-FDD1171241F9}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "inference", "inference\inference.pyproj", "{6D8DCDF9-3776-4E1B-A713-E9B6F2A49865}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "feature_selection", "feature_selection\feature_selection.pyproj", "{DB93DE74-8125-420F-A2C5-2145E80D6245}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67DD0427-0316-415B-9144-8098A6ABD371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67DD0427-0316-415B-9144-8098A6ABD371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9144F8B5-632B-4A72-BD8E-01D453AFFB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9144F8B5-632B-4A72-BD8E-01D453AFFB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE8BAA4-AB65-41F2-AF90-A3CF3189016E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE8BAA4-AB65-41F2-AF90-A3CF3189016E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D85A6D-FD53-41E5-B7E2-6ACC38373C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D85A6D-FD53-41E5-B7E2-6ACC38373C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9EDF94-8A08-4DB8-B2AB-FDD1171241F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9EDF94-8A08-4DB8-B2AB-FDD1171241F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8DCDF9-3776-4E1B-A713-E9B6F2A49865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8DCDF9-3776-4E1B-A713-E9B6F2A49865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB93DE74-8125-420F-A2C5-2145E80D6245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB93DE74-8125-420F-A2C5-2145E80D6245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
