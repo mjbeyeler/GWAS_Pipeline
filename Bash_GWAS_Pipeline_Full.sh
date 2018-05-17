@@ -9,9 +9,9 @@ else
 fi
 
 
-Rscript Pipeline_R_Part.R
+Rscript PipelinePart1_AdjustingPhenotypes_BuildingAlleleFilteringScript.R
 
-./Scripts/Plink2_Filtering_Alleles.sh
+./PipelinePart2_Plink2FilteringAlleles.sh
 
-jupyter nbconvert --to script GWAS_with_Permutations.ipynb
-python GWAS_with_Permutations.py 
+jupyter nbconvert --to script PipelinePart3_GWASWithPermutations.ipynb
+python PipelinePart3_GWASWithPermutations.py 
