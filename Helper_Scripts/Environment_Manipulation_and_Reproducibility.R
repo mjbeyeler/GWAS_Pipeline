@@ -1,3 +1,7 @@
+if(!require('checkpoint', character.only=T))
+  install.packages('checkpoint', repos="http://cran.us.r-project.org")
+
+
 # LOADING PACKAGES FUNCTION
 
 # Function that loads list of packages, and installs them if necessary.
@@ -8,7 +12,7 @@
     #   unloadNamespace(not.a.package)
     #   print(not.a.package)
     # }
-    install.packages(not.a.package);
+    install.packages(not.a.package, repos="http://cran.us.r-project.org");
     if(!require(not.a.package, character.only=T))
       stop(paste(not.a.package, "Package not found"))}}
   ))
@@ -51,10 +55,15 @@
   # If the current checkpoint differs from the one to be used for a project - or if no checkpoint is
   # loaded at all - it will be changed to the desired date, and installing all necessary packages for that snapshot date.
   if(current.project.date != PROJECT.SNAPSHOT.DATE) {
-    if (!dir.exists(paste("C:/Users/micha/Documents/.checkpoint/", PROJECT.SNAPSHOT.DATE, sep="")))
-      dir.create(paste("C:/Users/micha/Documents/.checkpoint/", PROJECT.SNAPSHOT.DATE, sep=""))
+    if (!dir.exists(paste("~/.checkpoint/", PROJECT.SNAPSHOT.DATE, sep=""))) {
+      if (!dir.exists("~/.checkpoint/"))
+        dir.create("~/.checkpoint/")
+      dir.create(paste("~/.checkpoint/", PROJECT.SNAPSHOT.DATE, sep=""))
+    }
+    setwd("Helper_Scripts/Empty_Folder")
     checkpoint::checkpoint(PROJECT.SNAPSHOT.DATE, scanForPackages= SCAN.FOR.PACKAGES)
-    # scanForPackages must be TRUE when first creating the checkpoint, in order for it to create a checkpoint folder
+    checkpoint::setSnapshot(PROJECT.SNAPSHOT.DATE)
+    setwd("../..")
     }
   
   # To speed up matrix calculations through multithreading for MRAN users
