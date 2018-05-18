@@ -1,7 +1,7 @@
 # Installation
 If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only need to install the FaST-LMM part. If you want to use the entire GWAS pipeline, R as described below will also be required.
 
-## FaST-LMM
+### FaST-LMM
 
 1) You need a Unix environment (WSL (Windows Subsystem for Linux works too)).
 2) Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
@@ -16,7 +16,7 @@ FaST-LMM was updated only recently. To make sure to have the latest pysnptools, 
 
 
 
-## R (for phenotype extraction)
+### R (for phenotype extraction)
 Install any R distribution. Then type
 
 ```
@@ -25,7 +25,7 @@ sudo apt install libxml2-dev       # "
 sudo apt install gfortran          # "  
 ```
 
-This will make sure that Unix R runs without errors.
+This (should) make(s) sure that Unix R runs the phenodype adjustments without errors.
 
 
 # GWAS Pipeline Info
@@ -42,10 +42,14 @@ The following files have to be added to the repositories manually:
 
 * dgrp2.bed, \*.bim and \*.fam to Data/
 
-# Running the Pipeline
+### Running the Pipeline
 
 Type `./Bash_GWAS_Pipeline_Full.sh` in an unix environment of your choice.
 
-# Modifying Pipeline Parameters
+#### Modifying Pipeline Parameters
 
-All important parameters can be modified in the header of the file
+All important parameters are located in the headers of the files `PipelinePart1_AdjustingPhenotypes_BuildingAlleleFilteringScript.Rmd` and `PipelinePart3_GWASWithPermutations.ipynb`, and can be customized at will.
+
+
+# GSM Extraction
+Open `Scripts/Extract_GSM.ipynb` in Jupyter. More information is given in the notebook itself.
