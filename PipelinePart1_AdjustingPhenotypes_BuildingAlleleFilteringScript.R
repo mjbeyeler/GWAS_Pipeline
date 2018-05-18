@@ -80,8 +80,8 @@ MAF=", MAF.THRESHOLD,"
 cd plink2_linux_x86_64
 ./plink2 --bfile ../Data/dgrp2 --keep ../Outputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Outputs/Current_Pipeline_Variants
 ", sep=''),
-file='Scripts/Plink2_Filtering_Alleles.sh')
+file='PipelinePart2_Plink2FilteringAlleles.sh')
 
 # The following command is necessary to 
-dos2unix('Scripts/Plink2_Filtering_Alleles.sh')
+dos2unix('PipelinePart2_Plink2FilteringAlleles.sh')
 

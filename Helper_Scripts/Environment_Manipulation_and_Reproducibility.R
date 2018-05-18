@@ -38,7 +38,7 @@ if(!require('checkpoint', character.only=T))
   if(current.version != PROJECT.VERSION)
     cat(paste("Warning: Your R version (", current.version,
               ") differs from the version this project was programmed in (", PROJECT.VERSION, "),\n",
-              "which might be causing invonveniences.\n\n",
+              "which might be causing inconveniences.\n\n",
               sep=""))
   
   

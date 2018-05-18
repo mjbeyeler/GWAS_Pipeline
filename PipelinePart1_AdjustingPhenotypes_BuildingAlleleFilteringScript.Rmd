@@ -92,12 +92,12 @@ Phenotype_Raw <- read.delim(paste('Inputs/',PHENOTYPE.NAME,'_Phenotype_Full.txt'
 
 # Supporting data
 
-Dgrp2_Inversions <- read.csv('Data/inversion.csv', header=T)
-Dgrp2_Infection <- read.csv('Data/wolbachia.csv')
+Dgrp2_Inversions <- read.csv('Raw_Data/inversion.csv', header=T)
+Dgrp2_Infection <- read.csv('Raw_Data/wolbachia.csv')
 
 # Some phenotypes actually use the flystock ID instead of the DGRP ID.
 # For these cases, this data frame will come in handy.
-# Dgrp_Flystock_Ids <- read.delim('Data/Dgrp-Flystocks-Ids.txt',
+# Dgrp_Flystock_Ids <- read.delim('Raw_Data/Dgrp-Flystocks-Ids.txt',
 #                                 comment.char='#')
 ```
 
@@ -134,7 +134,7 @@ PHENOTYPE_NAME=", PHENOTYPE.NAME,"
 MAF=", MAF.THRESHOLD,"
 
 cd plink2_linux_x86_64
-./plink2 --bfile ../Data/dgrp2 --keep ../Outputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Outputs/Current_Pipeline_Variants
+./plink2 --bfile ../Raw_Data/dgrp2 --keep ../Outputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Outputs/Current_Pipeline_Variants
 ", sep=''),
 file='PipelinePart2_Plink2FilteringAlleles.sh')
 

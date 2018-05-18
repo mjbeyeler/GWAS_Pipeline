@@ -1,3 +1,33 @@
+# Installation
+If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only need to install the FaST-LMM part. If you want to use the entire GWAS pipeline, R as described below will also be required.
+
+## FaST-LMM
+
+1) You need a Unix environment (WSL (Windows Subsystem for Linux works too)).
+2) Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
+3) This pipeline uses FaST-LMM from Microsoft Genomics (https://github.com/MicrosoftGenomics/FaST-LMM). Once Anaconda python is installed, download the full GWAS_Pipeline project, and in the *FaST-LMM* folder type `sudo python setup.py install`. After this the FaST-LMM is fully functional.
+
+#### Warning
+
+FaST-LMM was updated only recently. To make sure to have the latest pysnptools, just type the following in your Anaconda command prompt:
+
+`pip uninstall pysnptools`  
+`pip install pysnptool`
+
+
+
+## R (for phenotype extraction)
+Install any R distribution. Then type
+
+```
+sudo apt install libssl-dev        # openssl compatibility
+sudo apt install libxml2-dev       # "
+sudo apt install gfortran          # "  
+```
+
+This will make sure that Unix R runs without errors.
+
+
 # GWAS Pipeline Info
 
 This pipeline
@@ -16,16 +46,6 @@ The following files have to be added to the repositories manually:
 
 Type `./Bash_GWAS_Pipeline_Full.sh` in an unix environment of your choice.
 
-First run these commands to make sure Unix R will work without any errors:
-```
-sudo apt install libssl-dev        # openssl  
-sudo apt install libxml2-dev       # to be able to install igraph package  
-sudo apt install gfortran          # igraph compatibility  
-```
+# Modifying Pipeline Parameters
 
-# FaST-LMM Warning
-
-1. In order for FaST-LMM to work, you need Python 2.x. Python 3.x will not work.
-2. FaST-LMM was updated only recently. In order to make sure to have the latest pysnptools, just type the following in your Anaconda 2 command prompt.
-* `pip uninstall pysnptools`  
-  `pip install pysnptool`
+All important parameters can be modified in the header of the file

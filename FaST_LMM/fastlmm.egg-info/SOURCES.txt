@@ -21,7 +21,7 @@ fastlmm/association/_matchscript.py
 fastlmm/association/_pipelines.py
 fastlmm/association/epistasis.py
 fastlmm/association/fixed.py
-fastlmm/association/gsm_extraction_leave_out_one_chrom_false.py
+fastlmm/association/gsm_extraction.py
 fastlmm/association/gwas.py
 fastlmm/association/gwas_eval.py
 fastlmm/association/heritability_spatial_correction.py
@@ -173,7 +173,7 @@ fastlmm/association/_matchscript.py
 fastlmm/association/_pipelines.py
 fastlmm/association/epistasis.py
 fastlmm/association/fixed.py
-fastlmm/association/gsm_extraction_leave_out_one_chrom_false.py
+fastlmm/association/gsm_extraction.py
 fastlmm/association/gwas.py
 fastlmm/association/gwas_eval.py
 fastlmm/association/heritability_spatial_correction.py

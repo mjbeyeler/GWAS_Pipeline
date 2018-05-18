@@ -9,6 +9,8 @@ else
 fi
 
 
+Rscript Helper_Scripts/Rmd_to_R.R PipelinePart1_AdjustingPhenotypes_BuildingAlleleFilteringScript.R
+
 Rscript PipelinePart1_AdjustingPhenotypes_BuildingAlleleFilteringScript.R
 
 ./PipelinePart2_Plink2FilteringAlleles.sh
