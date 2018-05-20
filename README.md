@@ -1,4 +1,4 @@
-## Installation
+# Installation
 If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only need to install the FaST-LMM part. If you want to use the entire GWAS pipeline, R as described below will also be required.
 
 ### FaST-LMM
