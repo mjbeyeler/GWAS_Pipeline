@@ -35,11 +35,12 @@ This pipeline
 
 ## Data to be added manually
 
-* dgrp2.bed, \*.bim and \*.fam to Data/
+* dgrp2.bed, \*.bim and \*.fam, freeze2.common.rel.mat, wolbachia.csv, inversion.csv (all from the official DGRP2 site, wolbachia and inversion have to be converted from .xlsx to .csv) to Raw_Data/
+* Your phenotype files to Inputs/. They must be named `*Phenotype_Name*_Phenotype_Full.txt`
 
 ## Running the Pipeline
 
-1) Put your phenotype in the `Inputs/` folder and name it `*Pheno_Name*_Phenotype_Raw.txt`. It should follow the formatting `line_id \t phenotype value \t sex (m/f)`, and should not have a header.
+1) Put your phenotype in the `Inputs/` folder and name it `*Pheno_Name*_Phenotype_Full.txt`. It should follow the formatting `line_id \t phenotype value \t sex (m/f)`, and should not have a header.
 
 2) In the unix environment of your choice, in the main folder of the project, type  
 `var1=value1 var2=value2 ... ./Bash_GWAS_Pipeline_Full.sh\`  
