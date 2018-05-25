@@ -12,12 +12,15 @@
 
 source('Helper_Scripts/Environment_Manipulation_and_Reproducibility.R')
 
-# In order to make the script 100% reproducible, keep the next line active:
-.BuildReproducibleEnvironment(PROJECT.SNAPSHOT.DATE = "2018-05-16",
-                              PROJECT.VERSION       = "3.4.3",
-                              SCAN.FOR.PACKAGES     = TRUE)
 
-.LoadPackages(.LIST.OF.PACKAGES)
+# In order to make the script 100% reproducible, run_reproducible has to be set to TRUE
+run_reproducible <- as.logical(commandArgs(trailingOnly=TRUE)[5])
+if (run_reproducible == TRUE)
+  .build_reproducible_environment(PROJECT.SNAPSHOT.DATE = "2018-05-16",
+                                  PROJECT.VERSION       = "3.4.3",
+                                  SCAN.FOR.PACKAGES     = TRUE)
+
+.load_packages(.LIST.OF.PACKAGES)
 
 
 ## ----session info--------------------------------------------------------
@@ -29,23 +32,26 @@ sessionInfo()
 ## ------------------------------------------------------------------------
 
 SEXUAL.DIMORPHISM            <- TRUE
-PHENOTYPE.NAME               <- 'Food_Intake'
-SEX                          <- 'Female'
+PHENOTYPE.NAME               <- commandArgs(trailingOnly=T)[1]
+SEX                          <- commandArgs(trailingOnly=T)[2]
 NORMALITY.SIGNIFICANCE.LEVEL <- 0.05
 INVERSIONS.CONSIDERED        <- c('In.2L.t', 'In.2R.NS', 'In.3R.P', 'In.3R.K', 'In.3R.Mo')
 
-MAF.THRESHOLD=0.05
+MAF.THRESHOLD                <- commandArgs(trailingOnly=T)[3]
 
 
 # GWAS Constants
 
-NUMBER_OF_PERMUTATIONS       <-  0
-OUTPUT_NAME                  <-  paste('../Outputs/GWAS', PHENOTYPE.NAME, sep='_')
-PHENOTYPE_DATA               <-  paste('../Outputs/Fast-Lmm-Input-', PHENOTYPE.NAME, '-', SEX, '.txt', sep='')
-VARIANTS_TO_TEST             <-  '../Outputs/Current_Pipeline_Variants'
+NUMBER_OF_PERMUTATIONS       <- commandArgs(trailingOnly=T)[4]
+                              # commandArgs(trailingOnly=T)[5] is found above in reproducibility
+USE_OFFICIAL_GSM             <- commandArgs(trailingOnly=T)[6]
 
-fwrite(list(NUMBER_OF_PERMUTATIONS, OUTPUT_NAME, PHENOTYPE_DATA, VARIANTS_TO_TEST),
-       file='Outputs/GWAS_Constants', sep="\n")
+OUTPUT_NAME                  <- paste('GWAS', PHENOTYPE.NAME, SEX, sep='_')
+PHENOTYPE_DATA               <- paste('Inputs/Fast-Lmm-Input-', PHENOTYPE.NAME, '-', SEX, '.txt', sep='')
+VARIANTS_TO_TEST             <- 'Inputs/Current_Pipeline_Variants'
+
+fwrite(list(NUMBER_OF_PERMUTATIONS, OUTPUT_NAME, PHENOTYPE_DATA, VARIANTS_TO_TEST, USE_OFFICIAL_GSM),
+       file='Inputs/GWAS_Constants.txt', sep="\n")
 
 ## ------------------------------------------------------------------------
 # Main data
@@ -54,12 +60,12 @@ Phenotype_Raw <- read.delim(paste('Inputs/',PHENOTYPE.NAME,'_Phenotype_Full.txt'
 
 # Supporting data
 
-Dgrp2_Inversions <- read.csv('Data/inversion.csv', header=T)
-Dgrp2_Infection <- read.csv('Data/wolbachia.csv')
+Dgrp2_Inversions <- read.csv('Raw_Data/inversion.csv', header=T)
+Dgrp2_Infection <- read.csv('Raw_Data/wolbachia.csv')
 
 # Some phenotypes actually use the flystock ID instead of the DGRP ID.
 # For these cases, this data frame will come in handy.
-# Dgrp_Flystock_Ids <- read.delim('Data/Dgrp-Flystocks-Ids.txt',
+# Dgrp_Flystock_Ids <- read.delim('Raw_Data/Dgrp-Flystocks-Ids.txt',
 #                                 comment.char='#')
 
 ## ----functions-----------------------------------------------------------
@@ -78,7 +84,7 @@ PHENOTYPE_NAME=", PHENOTYPE.NAME,"
 MAF=", MAF.THRESHOLD,"
 
 cd plink2_linux_x86_64
-./plink2 --bfile ../Data/dgrp2 --keep ../Outputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Outputs/Current_Pipeline_Variants
+./plink2 --bfile ../Raw_Data/dgrp2 --keep ../Inputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Inputs/Current_Pipeline_Variants
 ", sep=''),
 file='PipelinePart2_Plink2FilteringAlleles.sh')
 

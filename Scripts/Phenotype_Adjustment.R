@@ -117,12 +117,12 @@ if(SEXUAL.DIMORPHISM == T) {
   mean.female <- sapply(occurring.levels, function(x) mean(Female$phenotype[Female$line.id==x]))
   mean.male <- sapply(occurring.levels, function(x) mean(Male$phenotype[Male$line.id==x]))
   write.table(data.frame(substr(occurring.levels, 6, 100), mean.female), 
-              file=paste('Outputs/Gwas-Online-Input-', phenotype.name,
+              file=paste('Inputs/Gwas-Online-Input-', phenotype.name,
                          'Female.csv', sep=''),
               sep=',', row.names=F, col.names=F, quote=F)
   
   write.table(data.frame(substr(occurring.levels, 6, 100), mean.male), 
-              file=paste('Outputs/Gwas-Online-Input-', phenotype.name,
+              file=paste('Inputs/Gwas-Online-Input-', phenotype.name,
                          'Male.csv', sep=''),
               sep=',', row.names=F, col.names=F, quote=F)
   
@@ -130,7 +130,7 @@ if(SEXUAL.DIMORPHISM == T) {
   phenotype.diff <- (mean.female.raw - mean.male.raw) / ((mean.male.raw + mean.female.raw) / 2)
   
   write.table(data.frame(substr(occurring.levels, 6, 100), phenotype.diff), 
-              file=paste('Outputs/Gwas-Online-Input-', phenotype.name,
+              file=paste('Inputs/Gwas-Online-Input-', phenotype.name,
                          'Dimorphism.csv', sep=''),
               sep=',', row.names=F, col.names=F, quote=F)
   
@@ -155,11 +155,11 @@ if(SEXUAL.DIMORPHISM == T) {
   )
   
   # Writing the whole model to a table.
-  write.table(Adjustment_Data_Female, file=paste('Outputs/',
+  write.table(Adjustment_Data_Female, file=paste('Inputs/',
                                                  phenotype.name,
                                                  '-Adjustment-Data-Female.txt', sep=''),
               sep='\t', row.names=F)
-  write.table(Adjustment_Data_Female, file=paste('Outputs/',
+  write.table(Adjustment_Data_Female, file=paste('Inputs/',
                                                  phenotype.name,
                                                  '-Adjustment-Data-Male.txt', sep=''),
               sep='\t', row.names=F)
@@ -197,45 +197,45 @@ if(SEXUAL.DIMORPHISM == T) {
   
   if(phenotype.adjusted == T) {
     write.table('# Phenotype was log-transformed!',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Female-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
     write.table('# Phenotype was log-transformed!',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Male-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
     write.table('# Phenotype was log-transformed!',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Dimorphism-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
   }
   else {
     write.table('# Phenotype was not log-transformed.',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Female-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
     write.table('# Phenotype was not log-transformed.',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Male-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
     write.table('# Phenotype was not log-transformed.',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Dimorphism-Commented.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
   }
   write.table(data.frame(occurring.levels, occurring.levels, adjusted.female),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Female-Commented.txt', sep=''),
               col.names=F, row.names=F, quote=F, append=T)
   
   write.table(data.frame(occurring.levels, occurring.levels, adjusted.male),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Male-Commented.txt', sep=''),
               col.names=F, row.names=F, quote=F, append=T)
   
   # Writing the difference one, for now using raw difference
   write.table(data.frame(occurring.levels, occurring.levels, phenotype.diff),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Dimorphism-Commented.txt', sep=''),
               col.names=F, row.names=F, quote=F, append=T)
   
@@ -243,18 +243,18 @@ if(SEXUAL.DIMORPHISM == T) {
   # For compatibility-reasons with FaST-LMM, I also have to write an uncommented version!
   
   write.table(data.frame(occurring.levels, occurring.levels, adjusted.female),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Female.txt', sep=''),
               col.names=F, row.names=F, quote=F)
   
   write.table(data.frame(occurring.levels, occurring.levels, adjusted.male),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Male.txt', sep=''),
               col.names=F, row.names=F, quote=F)
   
   # Writing the difference one, for now using raw difference
   write.table(data.frame(occurring.levels, occurring.levels, phenotype.diff),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Dimorphism.txt', sep=''),
               col.names=F, row.names=F, quote=F)
   
@@ -293,7 +293,7 @@ if(SEXUAL.DIMORPHISM == T) {
   # Writing a table that can be used for Online GWAS
   mean.total <- sapply(occurring.levels, function(x) mean(Phenotype_Raw$phenotype[Phenotype_Raw$line.id==x]))
   write.table(data.frame(substr(occurring.levels, 6, 100), mean.total), 
-              file=paste('Outputs/Gwas-Online-Input-', phenotype.name,
+              file=paste('Inputs/Gwas-Online-Input-', phenotype.name,
                          '.csv', sep=''),
               sep=',', row.names=F, col.names=F, quote=F)
   
@@ -311,7 +311,7 @@ if(SEXUAL.DIMORPHISM == T) {
   )
   
   # Writing the whole model to a table.
-  write.table(Adjustment_Data_Total, file=paste('Outputs/',
+  write.table(Adjustment_Data_Total, file=paste('Inputs/',
                                                 phenotype.name,
                                                 '-Adjustment-Data-Total.txt', sep=''),
               sep='\t', row.names=F)
@@ -337,19 +337,19 @@ if(SEXUAL.DIMORPHISM == T) {
   
   if(phenotype.adjusted == T) {
     write.table('# Phenotype was log-transformed!',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Total.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
   }
   else {
     write.table('# Phenotype was not log-transformed.',
-                file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+                file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                            '-Total.txt', sep=''),
                 col.names=F, row.names=F, quote=F)
   }
   
   write.table(data.frame(occurring.levels, occurring.levels, adjusted.total),
-              file=paste('Outputs/Fast-Lmm-Input-', phenotype.name,
+              file=paste('Inputs/Fast-Lmm-Input-', phenotype.name,
                          '-Total.txt', sep=''),
               col.names=F, row.names=F, quote=F, append=T)
   
@@ -357,8 +357,8 @@ if(SEXUAL.DIMORPHISM == T) {
 
 
 # Lastly, this script also writes all the ocurring lines in the raw phenotype to a text file that can be read by Plink. For convenience
-# WriteBare(data.frame(droplevels(Phenotype_Raw$line.id), droplevels(Phenotype_Raw$line.id)), paste('../Outputs/Plink-Phenotypes-', PHENOTYPE.NAME, '.txt', sep=''))
+# WriteBare(data.frame(droplevels(Phenotype_Raw$line.id), droplevels(Phenotype_Raw$line.id)), paste('../Inputs/Plink-Phenotypes-', PHENOTYPE.NAME, '.txt', sep=''))
 
 # mass-specific:
-WriteBare(data.frame(levels(droplevels(Female$line.id)), levels(droplevels(Female$line.id))), paste('Outputs/Plink-Lines-', PHENOTYPE.NAME, '.txt', sep=''))
+WriteBare(data.frame(levels(droplevels(Female$line.id)), levels(droplevels(Female$line.id))), paste('Inputs/Plink-Lines-', PHENOTYPE.NAME, '.txt', sep=''))
 

@@ -1,23 +1,18 @@
-## Installation
+# Installation
 If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only need to install the FaST-LMM part. If you want to use the entire GWAS pipeline, R as described below will also be required.
 
 ### FaST-LMM
 
-1) You need a Unix environment (WSL (Windows Subsystem for Linux works too)).
-2) Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
-3) This pipeline uses FaST-LMM from Microsoft Genomics (https://github.com/MicrosoftGenomics/FaST-LMM). Once Anaconda python is installed, download the full GWAS_Pipeline project, and in the *FaST-LMM* folder type `sudo python setup.py install`. After this the FaST-LMM is fully functional.
+1. You need a Unix environment. (WSL (Windows Subsystem for Linux) works too.)
+2. Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
+3. This pipeline uses FaST-LMM from Microsoft Genomics (https://github.com/MicrosoftGenomics/FaST-LMM). Once Anaconda python is installed, download the full GWAS_Pipeline project, and in its *FaST-LMM* folder type `sudo python setup.py install`. After this, FaST-LMM is fully functional.
 
-#### Warning
-
-FaST-LMM was updated only recently. To make sure to have the latest pysnptools, just type the following in your Anaconda command prompt:
-
+**Warning**: FaST-LMM was updated only recently. To make sure to have the latest pysnptools, just type the following in your Anaconda command prompt:  
 `pip uninstall pysnptools`  
 `pip install pysnptool`
 
-
-
-### R (for phenotype extraction)
-Install any R distribution. Then type
+### R (for phenotype adjustment)
+Install any R distribution in your Unix environment. Then type
 
 ```
 sudo apt install libssl-dev        # openssl compatibility
@@ -32,27 +27,34 @@ This (should) make(s) sure that Unix R runs the phenodype adjustments without er
 
 This pipeline
 
-1. adjusts your raw individual phenotype measurements for inversions and *Wolbachia* infections
-2. starting from the original DGRP2 variant files (.bed, .bim, .fam triad) from the official DGRP2 website, filters to only keep variants with MAF>0.05. The number of kept variants will be specific to your phenotype, i.e. depending on which lines where measured in your experiments.
-3. performs single SNP GWAS on the adjusted phenotype and filtered variants, and stores the results as a file.
+1) adjusts your raw individual phenotype measurements for inversions and *Wolbachia* infections
+2) Starting with the variants present in the original DGRP2 variant files (.bed, .bim, .fam triad) from the official DGRP2 website, filters to only keep variants with MAF>WhateverThresholdYouChoose (default is 0.05). The number of kept variants will be specific to your phenotype, i.e. depending on which lines where used in the specific experiments
+3) performs single SNP GWAS on the adjusted phenotype and filtered variants, and stores the results as a file in the `Outputs/` directory.
 
    * This pipeline can do permutations.
 
-The following files have to be added to the repositories manually:
+## Data to be added manually
 
 * dgrp2.bed, \*.bim and \*.fam to Data/
 
-### Running the Pipeline
+## Running the Pipeline
 
-Type `./Bash_GWAS_Pipeline_Full.sh` in an unix environment of your choice.
+1) Put your phenotype in the `Inputs/` folder and name it `*Pheno_Name*_Phenotype_Raw.txt`. It should follow the formatting `line_id \t phenotype value \t sex (m/f)`, and should not have a header.
 
-#### Modifying Pipeline Parameters
+2) In the unix environment of your choice, in the main folder of the project, type  
+`var1=value1 var2=value2 ... ./Bash_GWAS_Pipeline_Full.sh\`  
+<br/>  Any of the variables are optional and can be omitted! The variables that you can choose from, are:  
 
-All important parameters are located in the headers of the files `PipelinePart1_AdjustingPhenotypes_BuildingAlleleFilteringScript.Rmd` and `PipelinePart3_GWASWithPermutations.ipynb`, and can be customized at will.
-
+Variable | Description
+-- | --
+pheno | Name of your phenotype (Must correspond ot the way you named it in the phenotype file)
+sex | Female / Male / Dimorphism
+maf | minor allele frequency, between 0 and 0.5 (default is 0.05)
+perm | the number of permutations you want to perform (default is 0)
+reproducibility | If you want to run the script with all package versions in the exact state as when the scripts were written, put this to TRUE (default is TRUE)
+use_official_gsm | If set to FALSE, will calculate GSM from provided variants (default). If set to TRUE, will use the Freeze 2 GSM provided by Mackay group.
+  
+**Example:** `pheno=Mass sex=Male perm=5 reproducibility=FALSE ./Bash_GWAS_Pipeline_Full.sh`
 
 # GSM Extraction
 Open `Scripts/Extract_GSM.ipynb` in Jupyter. More information is given in the notebook itself.
-
-
-test123

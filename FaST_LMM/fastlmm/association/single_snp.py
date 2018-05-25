@@ -120,7 +120,6 @@ def single_snp(test_snps, pheno, K0=None,
          alleles (the PLINK standard) or the number of A2 alleles. False is the current default, but in the future the default will change to True.
     :type count_A1: bool
 
-
     :rtype: Pandas dataframe with one row per test SNP. Columns include "PValue"
 
 
@@ -141,7 +140,7 @@ def single_snp(test_snps, pheno, K0=None,
     
     # Resetting the Cache File
     if (save_test_statistic == True):
-        tmp_file = open('../Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', 'w+')
+        tmp_file = open('Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', 'w+')
         tmp_file.close()
     
     t0 = time.time()
@@ -604,8 +603,8 @@ def _internal_single(K0, test_snps, pheno, covar, K1,
         
         chi2stats = beta*beta/res['variance_beta']
         if (save_test_statistic == True):
-#            chi2stats.tofile('../Outputs/Fast-Lmm-Outputs/Test-Stat-Cache.txt', '\n')
-            tmp_file = open('../Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', 'a')
+#            chi2stats.tofile('Outputs/Fast-Lmm-Outputs/Test-Stat-Cache.txt', '\n')
+            tmp_file = open('Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', 'a')
             for i in chi2stats:
                 tmp_file.write("%s\n" % i)
             tmp_file.close()

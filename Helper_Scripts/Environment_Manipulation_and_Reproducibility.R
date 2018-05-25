@@ -6,7 +6,7 @@ if(!require('checkpoint', character.only=T))
 
 # Function that loads list of packages, and installs them if necessary.
 
-.LoadPackages <- function(package.list) {
+.load_packages <- function(package.list) {
   invisible(lapply(package.list, function(not.a.package) {if (!require(not.a.package, character.only=T)) {
     # if(not.a.package %in% loadedNamespaces()) {
     #   unloadNamespace(not.a.package)
@@ -22,7 +22,7 @@ if(!require('checkpoint', character.only=T))
 
 # REMOVING ALL EXISTING CHECKPOINTS
 
-.RemoveAllCheckpoints <- function() {
+.remove_all_checkpoints <- function() {
   sapply(checkpoint::checkpointArchives(), checkpoint::checkpointRemove)
 }
 
@@ -30,7 +30,7 @@ if(!require('checkpoint', character.only=T))
 
 # BUILD A REPRODUCIBLE ENVIRONMENT
 
-.BuildReproducibleEnvironment <- function(PROJECT.SNAPSHOT.DATE = substr(R.version.string, 18, 27),
+.build_reproducible_environment <- function(PROJECT.SNAPSHOT.DATE = substr(R.version.string, 18, 27),
                                           PROJECT.VERSION       = paste(R.version$major, R.version$minor, sep="."),
                                           SCAN.FOR.PACKAGES     = TRUE) {
   
@@ -84,7 +84,7 @@ if(!require('checkpoint', character.only=T))
 
 # Even more so: Knitting apparently can't be disturbed by the environment, as it runs in a sandboxed area. So, cleaning the environment isn't important. Only clean in cases of emergency.
 
-# .ClearEnvironment <- function() {
+# .clear_environment <- function() {
 #   
 #   # Detatches and unloads all the attached packages except the base ones,
 #   # which should not be detached anyway
