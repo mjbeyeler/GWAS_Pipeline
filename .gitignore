@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+FaST_LMM/VariantsPermuted.bed
+FaST_LMM/VariantsPermuted.bim
+FaST_LMM/VariantsPermuted.fam
