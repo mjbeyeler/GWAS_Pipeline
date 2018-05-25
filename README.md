@@ -35,8 +35,8 @@ This pipeline
 
 ## Data to be added manually
 
-* dgrp2.bed, \*.bim and \*.fam, freeze2.common.rel.mat, wolbachia.csv, inversion.csv (all from the official DGRP2 site, wolbachia and inversion have to be converted from .xlsx to .csv) to Raw_Data/
-* Your phenotype files to Inputs/. They must be named `*Phenotype_Name*_Phenotype_Full.txt`
+* `dgrp2.bed`, `*.bim` and `*.fam`, `freeze2.common.rel.mat`, `wolbachia.csv`, `inversion.csv` (all from the official DGRP2 site, `wolbachia` and `inversion` have to be converted from .xlsx to .csv) to `Raw_Data/`
+* Your phenotype files to `Inputs/`. They must be named `*Phenotype_Name*_Phenotype_Full.txt`
 
 ## Running the Pipeline
 
