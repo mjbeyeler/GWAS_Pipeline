@@ -1,5 +1,4 @@
-## ----loading packages and reproducibility, echo=FALSE, message=FALSE-----
-
+## ------------------------------------------------------------------------
 .LIST.OF.PACKAGES <- c(
   'data.table',           #
   'icesTAF',              # dos2unix function
@@ -10,11 +9,52 @@
 )
 
 
+
+INVERSIONS.CONSIDERED        <- c('In.2L.t', 'In.2R.NS', 'In.3R.P', 'In.3R.K', 'In.3R.Mo')
+NORMALITY.SIGNIFICANCE.LEVEL <- 0.05
+SEXUAL.DIMORPHISM            <- TRUE
+
+
+if (exists(commandArgs(trailingOnly=T)[1])) {
+  .RUN_REPRODUCIBLE            <- commandArgs(trailingOnly=T)[5]
+  
+  PHENOTYPE.NAME               <- commandArgs(trailingOnly=T)[1]
+  SEX                          <- commandArgs(trailingOnly=T)[2]
+  
+  MAF.THRESHOLD                <- commandArgs(trailingOnly=T)[3]
+  
+  
+  # GWAS Constants
+  
+  NUMBER_OF_PERMUTATIONS       <- commandArgs(trailingOnly=T)[4]
+  USE_OFFICIAL_GSM             <- commandArgs(trailingOnly=T)[6]
+} else {
+  .RUN_REPRODUCIBLE            <- FALSE
+  
+  PHENOTYPE.NAME               <- "Mass"
+  SEX                          <- "Male"
+  
+  MAF.THRESHOLD                <- 0.05
+  
+  
+  # GWAS Constants
+  
+  NUMBER_OF_PERMUTATIONS       <- 0
+  USE_OFFICIAL_GSM             <- TRUE
+}
+
+OUTPUT_NAME                  <- paste('GWAS', PHENOTYPE.NAME, SEX, sep='_')
+PHENOTYPE_DATA               <- paste('Inputs/Fast-Lmm-Input-', PHENOTYPE.NAME, '-', SEX, '.txt', sep='')
+VARIANTS_TO_TEST             <- 'Inputs/Current_Pipeline_Variants'
+
+## ----loading packages and reproducibility, echo=FALSE, message=FALSE-----
+
+
 source('Helper_Scripts/Environment_Manipulation_and_Reproducibility.R')
 
 
 # In order to make the script 100% reproducible, run_reproducible has to be set to TRUE
-run_reproducible <- as.logical(commandArgs(trailingOnly=TRUE)[5])
+run_reproducible <- as.logical(.RUN_REPRODUCIBLE)
 if (run_reproducible == TRUE)
   .build_reproducible_environment(PROJECT.SNAPSHOT.DATE = "2018-05-16",
                                   PROJECT.VERSION       = "3.4.3",
@@ -28,30 +68,6 @@ cat("The current checkpoint is:\n")
 checkpoint::setSnapshot()
 cat("\n\nSession Info:\n\n")
 sessionInfo()
-
-## ------------------------------------------------------------------------
-
-SEXUAL.DIMORPHISM            <- TRUE
-PHENOTYPE.NAME               <- commandArgs(trailingOnly=T)[1]
-SEX                          <- commandArgs(trailingOnly=T)[2]
-NORMALITY.SIGNIFICANCE.LEVEL <- 0.05
-INVERSIONS.CONSIDERED        <- c('In.2L.t', 'In.2R.NS', 'In.3R.P', 'In.3R.K', 'In.3R.Mo')
-
-MAF.THRESHOLD                <- commandArgs(trailingOnly=T)[3]
-
-
-# GWAS Constants
-
-NUMBER_OF_PERMUTATIONS       <- commandArgs(trailingOnly=T)[4]
-                              # commandArgs(trailingOnly=T)[5] is found above in reproducibility
-USE_OFFICIAL_GSM             <- commandArgs(trailingOnly=T)[6]
-
-OUTPUT_NAME                  <- paste('GWAS', PHENOTYPE.NAME, SEX, sep='_')
-PHENOTYPE_DATA               <- paste('Inputs/Fast-Lmm-Input-', PHENOTYPE.NAME, '-', SEX, '.txt', sep='')
-VARIANTS_TO_TEST             <- 'Inputs/Current_Pipeline_Variants'
-
-fwrite(list(NUMBER_OF_PERMUTATIONS, OUTPUT_NAME, PHENOTYPE_DATA, VARIANTS_TO_TEST, USE_OFFICIAL_GSM),
-       file='Inputs/GWAS_Constants.txt', sep="\n")
 
 ## ------------------------------------------------------------------------
 # Main data
@@ -90,4 +106,8 @@ file='PipelinePart2_Plink2FilteringAlleles.sh')
 
 # The following command is necessary to 
 dos2unix('PipelinePart2_Plink2FilteringAlleles.sh')
+
+## ------------------------------------------------------------------------
+fwrite(list(NUMBER_OF_PERMUTATIONS, OUTPUT_NAME, PHENOTYPE_DATA, VARIANTS_TO_TEST, USE_OFFICIAL_GSM),
+       file='Inputs/GWAS_Constants.txt', sep="\n")
 

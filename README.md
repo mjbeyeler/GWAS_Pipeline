@@ -5,7 +5,8 @@ If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only
 
 1. You need a Unix environment. (WSL (Windows Subsystem for Linux) works too.)
 2. Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
-3. This pipeline uses FaST-LMM from Microsoft Genomics (https://github.com/MicrosoftGenomics/FaST-LMM). Once Anaconda python is installed, download the full GWAS_Pipeline project, and in its *FaST-LMM* folder type `sudo python setup.py install`. After this, FaST-LMM is fully functional.
+3. This pipeline uses *a modified version of* FaST-LMM from Microsoft Genomics. Once Anaconda python is installed, download the full GWAS_Pipeline project, and in its *FaST-LMM* folder type `sudo python setup.py install`. After this, FaST-LMM is fully functional.  
+**Important**: Make sure to install FaST-LMM from the folder within this pipeline, and NOT the one from the Microsoft Genomics Github page.**
 
 **Warning**: FaST-LMM was updated only recently. To make sure to have the latest pysnptools, just type the following in your Anaconda command prompt:  
 `pip uninstall pysnptools`  

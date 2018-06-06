@@ -37,7 +37,7 @@ else:
     USE_OFFICIAL_GSM = False
     
     
-print 'Time: ' + str(time.clock()-start)
+print 'Time (s): ' + str(time.clock()-start)
 
 
 # # Importing, general preparations
@@ -57,7 +57,7 @@ sys.path.append('../PySnpTools')
 from pysnptools.snpreader import Bed
 from shutil import copyfile
 
-print 'Time: ' + str(time.clock()-start)
+print 'Time (s): ' + str(time.clock()-start)
 
 
 # # Actual GWAS
@@ -123,7 +123,7 @@ else:
                             output_file_name = 'Outputs/' + OUTPUT_NAME + '_Original.txt',
                             )
 
-print 'Total time: ' + str(time.clock()-start)
+print 'Total Time (s): ' + str(time.clock()-start)
 
 
 # In[ ]:
@@ -141,7 +141,7 @@ results_df.columns = ['Chr', 'ChrPos', 'SNP', 'Full ID', 'PValue', 'F-test stati
 mybed = Bed(VARIANTS_TO_TEST + '.bed')
 mysnpdata = mybed.read()
 
-print 'Time: ' + str(time.clock()-start)
+print 'Time (s): ' + str(time.clock()-start)
 
 
 # In[ ]:
