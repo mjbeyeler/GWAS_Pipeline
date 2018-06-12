@@ -15,7 +15,7 @@ NORMALITY.SIGNIFICANCE.LEVEL <- 0.05
 SEXUAL.DIMORPHISM            <- TRUE
 
 
-if (exists(commandArgs(trailingOnly=T)[1])) {
+if (!is.na(commandArgs(trailingOnly=T)[1])) {
   .RUN_REPRODUCIBLE            <- commandArgs(trailingOnly=T)[5]
   
   PHENOTYPE.NAME               <- commandArgs(trailingOnly=T)[1]
@@ -31,7 +31,7 @@ if (exists(commandArgs(trailingOnly=T)[1])) {
 } else {
   .RUN_REPRODUCIBLE            <- FALSE
   
-  PHENOTYPE.NAME               <- "Mass"
+  PHENOTYPE.NAME               <- "Phe00005"
   SEX                          <- "Male"
   
   MAF.THRESHOLD                <- 0.05
@@ -72,7 +72,7 @@ sessionInfo()
 ## ------------------------------------------------------------------------
 # Main data
 
-Phenotype_Raw <- read.delim(paste('Inputs/',PHENOTYPE.NAME,'_Phenotype_Full.txt', sep=""), header=T)
+Phenotype_Raw <- read.delim(paste('Inputs/',PHENOTYPE.NAME,'_Phenotype_Full.txt', sep=""), header=F)
 
 # Supporting data
 
@@ -100,7 +100,7 @@ PHENOTYPE_NAME=", PHENOTYPE.NAME,"
 MAF=", MAF.THRESHOLD,"
 
 cd plink2_linux_x86_64
-./plink2 --bfile ../Raw_Data/dgrp2 --keep ../Inputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Inputs/Current_Pipeline_Variants
+./plink2 --bfile ../Raw_Data/dgrp2 --allow-extra-chr --keep ../Inputs/Plink-Lines-$PHENOTYPE_NAME.txt --maf $MAF --make-bed --out ../Inputs/Current_Pipeline_Variants
 ", sep=''),
 file='PipelinePart2_Plink2FilteringAlleles.sh')
 

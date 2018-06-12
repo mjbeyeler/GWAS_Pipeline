@@ -42,14 +42,6 @@ if(SEXUAL.DIMORPHISM == T) {
   Phenotype_Raw <- Phenotype_Raw[!Phenotype_Raw$line.id %in% levels.to.drop, ]
 }
 
-# This part is specific to mass data, because they were stored in Flystock ID format.
-# Female$line.id <- Dgrp_Flystock_Ids$line.id[match(Phenotype_Raw$line.id, Dgrp_Flystock_Ids$Stock.No)][Phenotype_Raw$sex=='f']
-# Male$line.id <- Dgrp_Flystock_Ids$line.id[match(Phenotype_Raw$line.id, Dgrp_Flystock_Ids$Stock.No)][Phenotype_Raw$sex=='m']
-# # Here, I assume there was a typo. Cf. protocol
-# Female$line.id[is.na(Female$line.id)] = 'line_355'
-# Male$line.id[is.na(Male$line.id)] = 'line_355'
-# #End of mass-specific part.
-
 
 if(SEXUAL.DIMORPHISM == T) {
   occurring.levels <- levels(droplevels(Female$line.id))
@@ -164,12 +156,22 @@ if(SEXUAL.DIMORPHISM == T) {
                                                  '-Adjustment-Data-Male.txt', sep=''),
               sep='\t', row.names=F)
   
-  female.model <- with(Adjustment_Data_Female,
+  if (length(which(table(Adjustment_Data_Female$line.id) ==  1)) == 0 &&
+      length(which(table(Adjustment_Data_Male$line.id) ==  1)) == 0) {
+    female.model <- with(Adjustment_Data_Female,
+                         lmer(phenotype ~ infection.status + In.2L.t + In.2R.NS + 
+                                In.3R.P + In.3R.K + In.3R.Mo + (1|line.id)))
+    male.model <- with(Adjustment_Data_Male,
                        lmer(phenotype ~ infection.status + In.2L.t + In.2R.NS + 
                               In.3R.P + In.3R.K + In.3R.Mo + (1|line.id)))
-  male.model <- with(Adjustment_Data_Male,
-                     lmer(phenotype ~ infection.status + In.2L.t + In.2R.NS + 
-                            In.3R.P + In.3R.K + In.3R.Mo + (1|line.id)))
+  } else {
+    female.model <- with(Adjustment_Data_Female,
+                         lm(phenotype ~ infection.status + In.2L.t + In.2R.NS + 
+                                In.3R.P + In.3R.K + In.3R.Mo))
+    male.model <- with(Adjustment_Data_Male,
+                       lm(phenotype ~ infection.status + In.2L.t + In.2R.NS + 
+                              In.3R.P + In.3R.K + In.3R.Mo))
+  }
   
   Adjustment_Prediction_Data <- expand.grid(line.id=occurring.levels,
                                             infection.status=factor('n', levels=c('n', 'y')),
@@ -361,4 +363,6 @@ if(SEXUAL.DIMORPHISM == T) {
 
 # mass-specific:
 WriteBare(data.frame(levels(droplevels(Female$line.id)), levels(droplevels(Female$line.id))), paste('Inputs/Plink-Lines-', PHENOTYPE.NAME, '.txt', sep=''))
+
+cat(paste('Phenotype adjustment for the', PHENOTYPE.NAME, 'phenotype successfully performed.\n\n'))
 
