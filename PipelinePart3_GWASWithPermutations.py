@@ -126,7 +126,7 @@ else:
 print 'Total Time (s): ' + str(time.clock()-start)
 
 
-# In[6]:
+# In[5]:
 
 
 test_stat = pd.read_csv('Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', header=None)
@@ -144,7 +144,7 @@ mysnpdata = mybed.read()
 print 'Time (s): ' + str(time.clock()-start)
 
 
-# In[36]:
+# In[6]:
 
 
 pheno = _pheno_fixup(PHENOTYPE_DATA, count_A1=None).read()
@@ -176,7 +176,7 @@ for i in range(snpdata.shape[1]):
         mean_major[i] = meanalt
 
 
-# In[35]:
+# In[7]:
 
 
 # print np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1])
@@ -195,7 +195,7 @@ for i in range(snpdata.shape[1]):
 # print(np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1]))
 
 
-# In[ ]:
+# In[8]:
 
 
 diff_df = diff_df = pd.DataFrame(data={'MajMinDiff':diff,
@@ -240,7 +240,7 @@ results_df = pd.merge(results_df, diff_df, on='SNP')
 
 # # Permutations
 
-# In[ ]:
+# In[9]:
 
 
 # Shuffling ALLELES by VARIANT
@@ -304,7 +304,7 @@ for i in range(NUMBER_OF_PERMUTATIONS):
     print('Time for permutation GWAS:' + str(time.time() - time_permut_0) + 's')   
 
 
-# In[ ]:
+# In[10]:
 
 
 results_df.to_csv(OUTPUT_NAME + '_with_Permutations.txt', sep="\t", index=False)
@@ -312,7 +312,7 @@ results_df.to_csv(OUTPUT_NAME + '_with_Permutations.txt', sep="\t", index=False)
 
 # # Manhattan Plot
 
-# In[ ]:
+# In[12]:
 
 
 import matplotlib.pyplot as plt

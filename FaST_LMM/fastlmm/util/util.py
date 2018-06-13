@@ -467,7 +467,7 @@ def _color_list(chr_list,rle):
     result = [index_to_color[chr_to_index[chr]%len(index_to_color)] for chr in chr_list]
     return result
 
-def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,plot_threshold_upper=0.000000001,vline_significant=False,marker="o", chromosome_starts=None, xaxis_unit_bp=True, alpha=0.5):
+def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,vline_significant=False,marker="o", chromosome_starts=None, xaxis_unit_bp=True, alpha=0.5):
     """
     Function to create a Manhattan plot.  See http://en.wikipedia.org/wiki/Manhattan_plot.
 
@@ -527,11 +527,8 @@ def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,plot
     else:               #use rank indices for x-axis
         chr_pos_list = np.arange(array.shape[0])
         xTickMarks = [str(int(item)) for item,count in rle]
-#        print(xTickMarks)
         plt.xlim([0,array.shape[0]])
-       plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
-        
-        # plt.xticks(list(_rel_to_midpoint(rle)), ('2L', '2R', '3L' , '3R', 'X', '4'))
+        plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
     y = -np.log10(array[:,2])
     max_y = y.max()
 
@@ -549,7 +546,7 @@ def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,plot
 
     if pvalue_line:
         plt.axhline(-np.log10(pvalue_line),linestyle="--",color='gray')
-    plt.ylim([-np.log10(plot_threshold),-np.log10(plot_threshold_upper)])
+    plt.ylim([-np.log10(plot_threshold),None])
     return chromosome_starts
 
 def _compute_x_positions_chrom(positions, offset=1e5):
@@ -578,4 +575,3 @@ if __name__ == "__main__":
 
     import doctest
     doctest.testmod()
-
