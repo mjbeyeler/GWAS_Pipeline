@@ -6,7 +6,7 @@ If you only need the GSM extraction script (Scripts/Extract_GSM.ipynb), you only
 1. You need a Unix environment. (WSL (Windows Subsystem for Linux) works too.)
 2. Install an Anaconda 2 for Linux distribution: https://www.anaconda.com/download/#linux
 3. This pipeline uses *a modified version of* FaST-LMM from Microsoft Genomics. Once Anaconda python is installed, download the full GWAS_Pipeline project, and in its *FaST-LMM* folder type `sudo python setup.py install`. After this, FaST-LMM is fully functional.  
-**Important**: Make sure to install FaST-LMM from the folder within this pipeline, and NOT the one from the Microsoft Genomics Github page.
+**Important**: Make sure to install FaST-LMM from the folder within this pipeline, and NOT the one from the Microsoft Genomics Github page.**
 
 **Warning**: FaST-LMM was updated only recently. To make sure to have the latest pysnptools, just type the following in your Anaconda command prompt:  
 `pip uninstall pysnptools`  
@@ -21,16 +21,7 @@ sudo apt install libxml2-dev       # "
 sudo apt install gfortran          # "  
 ```
 
-This (should) make(s) sure that Unix R runs the phenotype adjustments without errors.
-
-### Add Permission to Execute the Pipeline
-Run the following code in the project's top-level folder:
-
-```
-chmod +x Bash_GWAS_Pipeline_Full.sh
-chmod +x PipelinePart2_Plink2FilteringAlleles.sh
-chmod +x plink2_linux_x86_64/plink2
-```
+This (should) make(s) sure that Unix R runs the phenodype adjustments without errors.
 
 
 # GWAS Pipeline Info

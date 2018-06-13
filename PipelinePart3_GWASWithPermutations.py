@@ -9,7 +9,7 @@
 #  # Time measurement
 # 
 
-# In[1]:
+# In[ ]:
 
 
 import time
@@ -18,7 +18,7 @@ start = time.clock()
 
 # # CONSTANTS and INPUTS 
 
-# In[2]:
+# In[ ]:
 
 
 import os
@@ -42,7 +42,7 @@ print 'Time (s): ' + str(time.clock()-start)
 
 # # Importing, general preparations
 
-# In[3]:
+# In[ ]:
 
 
 from fastlmm.association import single_snp
@@ -62,7 +62,7 @@ print 'Time (s): ' + str(time.clock()-start)
 
 # # Actual GWAS
 
-# In[4]:
+# In[ ]:
 
 
 # Clearing cache
@@ -126,7 +126,7 @@ else:
 print 'Total Time (s): ' + str(time.clock()-start)
 
 
-# In[6]:
+# In[ ]:
 
 
 test_stat = pd.read_csv('Outputs/Fast-Lmm-Cache/Test-Stat-Cache.txt', header=None)
@@ -144,7 +144,7 @@ mysnpdata = mybed.read()
 print 'Time (s): ' + str(time.clock()-start)
 
 
-# In[14]:
+# In[ ]:
 
 
 pheno = _pheno_fixup(PHENOTYPE_DATA, count_A1=None).read()
@@ -174,17 +174,6 @@ for i in range(snpdata.shape[1]):
         maf[i] = float(len(ref)) / (len(ref) + len(alt))
         n_alleles[i] = len(ref) + len(alt)
         mean_major[i] = meanalt
-
-
-# In[13]:
-
-
-print pheno.iid[:, 1]
-print mysnpdata.iid[:, 1]
-
-print len(pheno.iid[:, 1])
-
-print np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1])
 
 
 # In[ ]:
@@ -318,7 +307,7 @@ import fastlmm.util.util as flutil
 flutil.manhattan_plot(results_df.as_matrix(["Chr", "ChrPos", "PValue"]),pvalue_line=1e-5,xaxis_unit_bp=False, plot_threshold=1)
 pylab.savefig('Figures/' + OUTPUT_NAME + '_Manhattan_Plot.png')
 pylab.close()
-print 'Time after Manhattan plot: ' + str(time.clock()-start)
+print 'Time afer Manhattan plot: ' + str(time.clock()-start)
 
 
 # # QQ Plot
