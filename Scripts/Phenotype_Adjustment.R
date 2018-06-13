@@ -17,15 +17,10 @@ Dgrp2_Infection$line.id <- as.factor(paste('line_',
 
 # Giving standardized column names, dropping NA values, and DROPPING NON-DGRP2 lines
 if(SEXUAL.DIMORPHISM == T) {
-  # Variants_Fam <- read.table('Raw_Data/dgrp2.fam')
   colnames(Phenotype_Raw) <- c('line.id', 'phenotype', 'sex')
   Phenotype_Raw <- Phenotype_Raw[!is.na(Phenotype_Raw$phenotype), ]
   levels.to.drop <- levels(Phenotype_Raw$line.id)[!levels(Phenotype_Raw$line.id)
-                                                    %in% levels(Dgrp2_Infection$line.id)]
-  
-  # levels.to.drop <- c(levels.to.drop,
-  #                     levels(Phenotype_Raw$line.id)[!levels(Phenotype_Raw$line.id)
-  #                                                     %in% levels(Variants_Fam$V1)])
+                                                  %in% levels(Dgrp2_Infection$line.id)]
   Phenotype_Raw <- Phenotype_Raw[!Phenotype_Raw$line.id %in% levels.to.drop, ]
   Female <- Phenotype_Raw[Phenotype_Raw$sex=='f', -3]
   Male <- Phenotype_Raw[Phenotype_Raw$sex=='m', -3]

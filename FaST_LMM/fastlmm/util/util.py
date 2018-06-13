@@ -529,7 +529,7 @@ def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,plot
         xTickMarks = [str(int(item)) for item,count in rle]
 #        print(xTickMarks)
         plt.xlim([0,array.shape[0]])
-       plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
+#        plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
         
         # plt.xticks(list(_rel_to_midpoint(rle)), ('2L', '2R', '3L' , '3R', 'X', '4'))
     y = -np.log10(array[:,2])

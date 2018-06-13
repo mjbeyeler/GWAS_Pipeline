@@ -144,7 +144,7 @@ mysnpdata = mybed.read()
 print 'Time (s): ' + str(time.clock()-start)
 
 
-# In[36]:
+# In[14]:
 
 
 pheno = _pheno_fixup(PHENOTYPE_DATA, count_A1=None).read()
@@ -176,23 +176,15 @@ for i in range(snpdata.shape[1]):
         mean_major[i] = meanalt
 
 
-# In[35]:
+# In[13]:
 
 
-# print np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1])
-# snpdata = mysnpdata.val
-# print mysnpdata.val
+print pheno.iid[:, 1]
+print mysnpdata.iid[:, 1]
 
-# print VARIANTS_TO_TEST
-# print pheno.shape
-# print pheno.iid.shape
-# print mysnpdata.iid.shape
-# # print pheno.iid[:, 1]
-# # print mysnpdata.iid[:, 1]
+print len(pheno.iid[:, 1])
 
-# # print len(pheno.iid[:, 1])
-
-# print(np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1]))
+print np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1])
 
 
 # In[ ]:
