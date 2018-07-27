@@ -33,7 +33,7 @@ def single_snp(test_snps, pheno, K0=None,
                  K1=None, mixing=None,
                  covar=None, covar_by_chrom=None, leave_out_one_chrom=True, output_file_name=None, h2=None, log_delta=None,
                  cache_file = None, GB_goal=None, interact_with_snp=None, force_full_rank=False, force_low_rank=False, G0=None, G1=None, runner=None,
-                 count_A1=None, save_test_statistic=False, use_ncsu_gsm=False):
+                 count_A1=None, save_test_statistic=False):
     """
     Function performing single SNP GWAS using cross validation over the chromosomes and REML. Will reorder and intersect IIDs as needed.
     (For backwards compatibility, you may use 'leave_out_one_chrom=False' to skip cross validation, but that is not recommended.)
@@ -119,9 +119,6 @@ def single_snp(test_snps, pheno, K0=None,
     :param count_A1: If it needs to read SNP data from a BED-formatted file, tells if it should count the number of A1
          alleles (the PLINK standard) or the number of A2 alleles. False is the current default, but in the future the default will change to True.
     :type count_A1: bool
-
-    :param use_ncsu_gsm: if True, uses the freeze 2 GSM provided by Mackay lab. Else, generates GSM from variants provided1
-
 
     :rtype: Pandas dataframe with one row per test SNP. Columns include "PValue"
 
@@ -553,9 +550,8 @@ def _internal_single(K0, test_snps, pheno, covar, K1,
         with np.load(cache_file) as data: #!! similar code in epistasis
             lmm.U = data['arr_0']
             lmm.S = data['arr_1']
-            lmm.setY(Y=pheno)
-            h2 = lmm.findH2()
-            mixing = 0
+            h2 = data['arr_2'][0]
+            mixing = data['arr_2'][1]
     else:
         K, h2, mixer = _Mixer.combine_the_best_way(K0, K1, covar, y, mixing, h2, force_full_rank=force_full_rank, force_low_rank=force_low_rank,kernel_standardizer=DiagKtoN())
         mixing = mixer.mixing

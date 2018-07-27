@@ -526,13 +526,14 @@ def manhattan_plot(chr_pos_pvalue_array,pvalue_line=None,plot_threshold=1.0,plot
         plt.xticks(chromosome_starts[:,1:3].mean(1),chromosome_starts[:,0])
     else:               #use rank indices for x-axis
         chr_pos_list = np.arange(array.shape[0])
-        xTickMarks = [str(int(item)) for item,count in rle]
-#        print(xTickMarks)
+        xTickMarks = [str(item) for item,count in rle]
         plt.xlim([0,array.shape[0]])
-#        plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
-        
-        plt.xticks(list(_rel_to_midpoint(rle)), ('2L', '2R', '3L' , '3R', '4', 'X'))
-    y = -np.log10(array[:,2])
+        plt.xticks(list(_rel_to_midpoint(rle)), xTickMarks)
+
+    y = np.ndarray([])
+    for i in array[:,2]:
+        y = np.append(y, -np.log10(i))
+    # y = -np.log10(array[:,2])
     max_y = y.max()
 
     if pvalue_line and vline_significant:   #mark significant associations (ones that pass the pvalue_line) by a red vertical line:

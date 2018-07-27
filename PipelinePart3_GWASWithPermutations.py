@@ -179,25 +179,6 @@ for i in range(snpdata.shape[1]):
 # In[7]:
 
 
-# print np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1])
-# snpdata = mysnpdata.val
-# print mysnpdata.val
-
-# print VARIANTS_TO_TEST
-# print pheno.shape
-# print pheno.iid.shape
-# print mysnpdata.iid.shape
-# # print pheno.iid[:, 1]
-# # print mysnpdata.iid[:, 1]
-
-# # print len(pheno.iid[:, 1])
-
-# print(np.searchsorted(pheno.iid[:,1], mysnpdata.iid[:,1]))
-
-
-# In[8]:
-
-
 diff_df = diff_df = pd.DataFrame(data={'MajMinDiff':diff,
                                        'MeanMajor': mean_major,
                                        'MAF':maf,
@@ -240,7 +221,7 @@ results_df = pd.merge(results_df, diff_df, on='SNP')
 
 # # Permutations
 
-# In[9]:
+# In[8]:
 
 
 # Shuffling ALLELES by VARIANT
@@ -304,7 +285,7 @@ for i in range(NUMBER_OF_PERMUTATIONS):
     print('Time for permutation GWAS:' + str(time.time() - time_permut_0) + 's')   
 
 
-# In[10]:
+# In[9]:
 
 
 results_df.to_csv(OUTPUT_NAME + '_with_Permutations.txt', sep="\t", index=False)
@@ -312,26 +293,34 @@ results_df.to_csv(OUTPUT_NAME + '_with_Permutations.txt', sep="\t", index=False)
 
 # # Manhattan Plot
 
-# In[12]:
+# In[15]:
 
 
 import matplotlib.pyplot as plt
-
-# The next line makes sure that the code also runs on machines without graphical display (such as WSL).
+# makes sure can save pictures that a display is present!
 plt.switch_backend('agg')
-# matplotlib.use('agg')
 
 import pylab
 import fastlmm.util.util as flutil
-flutil.manhattan_plot(results_df.as_matrix(["Chr", "ChrPos", "PValue"]),pvalue_line=1e-5,xaxis_unit_bp=False, plot_threshold=1)
-pylab.savefig('Figures/' + OUTPUT_NAME + '_Manhattan_Plot.png')
-pylab.close()
-print 'Time after Manhattan plot: ' + str(time.clock()-start)
+
+# better manhattan plot than MS Genomics one (or at least more robust)
+# can be tweaked at will!
+from assocplots.manhattan import *
+from matplotlib.pyplot import figure
+
+
+figure(num=None, figsize=(10, 7), dpi=80,)
+
+manhattan(results_df["PValue"], results_df["ChrPos"], results_df["Chr"], OUTPUT_NAME,
+         lines=[5], colors=['r', 'b'], cut=1)
+
+plt.savefig('Figures/' + OUTPUT_NAME + '_Manhattan_Plot.png')
+plt.close()
 
 
 # # QQ Plot
 
-# In[ ]:
+# In[11]:
 
 
 from fastlmm.util.stats import plotp
@@ -341,7 +330,11 @@ pylab.close()
 
 print 'Time after QQ plot: ' + str(time.clock()-start)
 
-print "Done!"
-
 
 # # The End
+
+# In[12]:
+
+
+print "\nDone!\n\n"
+
